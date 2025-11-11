@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Stav objednávek</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        table { border-collapse: collapse; width: 50%; }
+        td, th { border: 1px solid #999; padding: 0.5em; }
+    </style>
+</head>
+<body>
+<h1>Stav objednávek</h1>
+<table>
+    <thead>
+    <tr><th>ID objednávky</th><th>Status</th></tr>
+    </thead>
+    <tbody id="orders"></tbody>
+</table>
+
+<script>
+    async function fetchOrders() {
+        const res = await fetch('/orders');
+        const data = await res.json();
+        const tbody = document.getElementById('orders');
+        tbody.innerHTML = '';
+        for (const id in data) {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${id}</td><td>${data[id]}</td>`;
+            tbody.appendChild(row);
+        }
+    }
+
+    // aktualizace každou sekundu
+    setInterval(fetchOrders, 1000);
+    fetchOrders();
+</script>
+</body>
+</html>
