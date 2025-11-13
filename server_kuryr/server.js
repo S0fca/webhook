@@ -5,7 +5,6 @@ const crypto = require('crypto');
 
 
 const SHARED_SECRET = 'tajneheslo123';
-// Endpoint pro přijetí nové objednávky
 function sendWebhook(order, status) {
     const body = JSON.stringify({
         id: order.id,
@@ -53,7 +52,7 @@ app.post('/order', (req, res) => {
 });
 
 
-//res.sendStatus(202);  // odpověď 202 Accepted – objednávka převzata k dalšímu zpracování
+//res.sendStatus(202);
 
 
 app.listen(3000, () => {
